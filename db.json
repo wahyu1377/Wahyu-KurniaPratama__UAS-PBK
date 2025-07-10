@@ -1,0 +1,131 @@
+{
+  "orders": [
+    {
+      "id": 1,
+      "customerName": "John Doe",
+      "phone": "081234567890",
+      "service": "Wash & Dry",
+      "weight": 2.5,
+      "pricePerKg": 5000,
+      "totalPrice": 12500,
+      "status": "pending",
+      "createdAt": "2024-01-15T10:30:00.000Z"
+    },
+    {
+      "id": 2,
+      "customerName": "Jane Smith",
+      "phone": "081234567891",
+      "service": "Dry Clean",
+      "weight": 1.8,
+      "pricePerKg": 8000,
+      "totalPrice": 14400,
+      "status": "completed",
+      "createdAt": "2024-01-14T14:20:00.000Z"
+    },
+    {
+      "id": 3,
+      "customerName": "Bob Johnson",
+      "phone": "081234567892",
+      "service": "Express",
+      "weight": 3.2,
+      "pricePerKg": 7000,
+      "totalPrice": 22400,
+      "status": "processing",
+      "createdAt": "2024-01-13T09:15:00.000Z"
+    },
+    {
+      "customerName": "ADI",
+      "phone": "3542523",
+      "service": "Dry Clean",
+      "weight": 4,
+      "pricePerKg": 5000,
+      "totalPrice": 20000,
+      "id": 1752157002626,
+      "createdAt": "2025-07-10T14:16:42.626Z",
+      "status": "pending"
+    },
+    {
+      "customerName": "ahmad",
+      "phone": "2432",
+      "service": "Dry Clean",
+      "weight": 3,
+      "pricePerKg": 5000,
+      "totalPrice": 15000,
+      "id": 1752157016394,
+      "createdAt": "2025-07-10T14:16:56.394Z",
+      "status": "pending"
+    }
+  ],
+  "customers": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "phone": "081234567890",
+      "email": "john@example.com",
+      "address": "Jl. Merdeka No. 123",
+      "totalOrders": 5,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "name": "wahyu",
+      "phone": "08235124",
+      "email": "wahyukurnia@gmail.com",
+      "address": "jl.marpoyan",
+      "id": 1752156239546,
+      "totalOrders": 0,
+      "createdAt": "2025-07-10T14:03:59.546Z"
+    }
+  ],
+  "services": [
+    {
+      "id": 32523452351,
+      "name": "Wash & Dry",
+      "price": 5000,
+      "duration": "24 hours",
+      "description": "Regular washing and drying service"
+    },
+    {
+      "id": 223425532,
+      "name": "Dry Clean",
+      "price": 8000,
+      "duration": "48 hours",
+      "description": "Professional dry cleaning service"
+    },
+    {
+      "id": 1324113242,
+      "name": "Iron Only",
+      "price": 3000,
+      "duration": "12 hours",
+      "description": "Ironing service only"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin123",
+      "name": "Administrator",
+      "role": "admin"
+    },
+    {
+      "username": "admin",
+      "password": "admin123",
+      "id": 2
+    },
+    {
+      "username": "wrong",
+      "password": "wrong",
+      "id": 3
+    },
+    {
+      "username": "user",
+      "password": "user123",
+      "id": 4
+    },
+    {
+      "username": "wrong",
+      "password": "wrong",
+      "id": 5
+    }
+  ]
+}

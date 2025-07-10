@@ -1,0 +1,34 @@
+{
+  "name": "laundry-management-system",
+  "version": "1.0.0",
+  "description": "Laundry Management System built with Vue.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:ui": "vitest --ui",
+    "test:basic": "vitest run src/__tests__/basic.test.js",
+    "test:store": "vitest run src/__tests__/orders-store.test.js",
+    "test:login": "vitest run src/__tests__/login.test.js",
+    "json-server": "json-server --watch db.json --port 3001",
+    "dev:full": "concurrently \"npm run json-server\" \"npm run dev\""
+  },
+  "dependencies": {
+    "pinia": "^2.1.0",
+    "vue": "^3.3.0",
+    "vue-router": "^4.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.2.0",
+    "@vue/test-utils": "^2.4.0",
+    "concurrently": "^8.2.0",
+    "happy-dom": "^10.0.0",
+    "jsdom": "^22.1.0",
+    "json-server": "^0.17.3",
+    "vite": "^4.4.0",
+    "vitest": "^0.34.0"
+  }
+}
