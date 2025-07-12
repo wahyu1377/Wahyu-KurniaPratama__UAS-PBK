@@ -1,6 +1,6 @@
 # Laundry Management System
 
-Sistem manajemen laundry yang dibangun menggunakan Vue.js 3, Vue Router, Pinia, dan json-server untuk memenuhi persyaratan tugas UAS PBK.
+Sistem manajemen laundry yang dibangun menggunakan Vue.js 3, Vue Router, Pinia, dan json-server 
 
 ## Fitur Utama
 
