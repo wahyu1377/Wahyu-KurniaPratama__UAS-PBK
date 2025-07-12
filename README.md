@@ -233,11 +233,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Kontak
 
-Nama: [Nama Mahasiswa]
-NIM: [NIM Mahasiswa]
-Email: [email@example.com]
+Nama: [Wahyu Kurnia Pratama]
+NPM: [233510228]
+Email: [wahyukurniapratama@studebt.uir.ac.id]
 
 Project Link: [https://github.com/username/laundry-management-system](https://github.com/username/laundry-management-system)
-\`\`\`
 
-Terakhir, mari kita buat file konfigurasi untuk Vitest:
