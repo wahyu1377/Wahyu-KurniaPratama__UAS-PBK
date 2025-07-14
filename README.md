@@ -218,11 +218,10 @@ Jika ingin berkontribusi pada proyek ini:
 Proyek ini menggunakan lisensi MIT. Silakan gunakan dan modifikasi sesuai kebutuhan.
 
 ## Kontak
-
-**Nama**: [Nama Mahasiswa]
-**NIM**: [NIM Mahasiswa]
-**Email**: [email@example.com]
-**GitHub**: [@username](https://github.com/username)
+Nama: [WAHYU KURNIA PRATAMA]
+NIM: [233510228]
+Email: [wahyukurniapratama@student.uir.ac.id]
+GitHub:https://github.com/wahyu1377 
 
 ---
 
