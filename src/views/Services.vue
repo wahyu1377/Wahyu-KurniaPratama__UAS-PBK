@@ -89,8 +89,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { mockServices } from '../data/mockData.js'
 
-const services = ref([])
+const services = ref([...mockServices])
 const loading = ref(false)
 const error = ref('')
 const showAddModal = ref(false)
@@ -104,54 +105,40 @@ const newService = ref({
 
 const fetchServices = async () => {
   loading.value = true
-  try {
-    const response = await fetch('http://localhost:3001/services')
-    if (!response.ok) throw new Error('Failed to fetch services')
-    services.value = await response.json()
-  } catch (err) {
-    error.value = err.message
-  } finally {
-    loading.value = false
-  }
+  // Simulate API call delay
+  await new Promise(resolve => setTimeout(resolve, 300))
+  loading.value = false
 }
 
 const addNewService = async () => {
   try {
-    const response = await fetch('http://localhost:3001/services', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        ...newService.value,
-        id: Date.now()
-      })
-    })
+    const service = {
+      ...newService.value,
+      id: Date.now()
+    }
 
-    if (!response.ok) throw new Error('Failed to add service')
-    const service = await response.json()
     services.value.push(service)
     showAddModal.value = false
     newService.value = { name: '', price: 0, duration: '', description: '' }
   } catch (err) {
-    error.value = err.message
+    error.value = "Failed to add service"
   }
 }
 
 const editService = (service) => {
   console.log('Edit service:', service)
+  // Implement edit functionality
 }
 
 const deleteService = async (id) => {
   if (confirm('Are you sure you want to delete this service?')) {
     try {
-      const response = await fetch(`http://localhost:3001/services/${id}`, {
-        method: 'DELETE'
-      })
-      if (!response.ok) throw new Error('Failed to delete service')
-      services.value = services.value.filter(s => s.id !== id)
+      const index = services.value.findIndex(s => s.id === id)
+      if (index !== -1) {
+        services.value.splice(index, 1)
+      }
     } catch (err) {
-      error.value = err.message
+      error.value = "Failed to delete service"
     }
   }
 }
@@ -191,6 +178,11 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: transform 0.2s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-2px);
 }
 
 .service-info h3 {
@@ -215,6 +207,34 @@ onMounted(() => {
   margin-top: 15px;
   display: flex;
   gap: 10px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.btn-primary {
+  background-color: #3498db;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #95a5a6;
+  color: white;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn-sm {
+  padding: 4px 8px;
+  font-size: 0.8rem;
 }
 
 .modal-overlay {
@@ -262,5 +282,16 @@ onMounted(() => {
   justify-content: flex-end;
   gap: 10px;
   margin-top: 20px;
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 40px;
+  background: white;
+  border-radius: 8px;
+}
+
+.error {
+  color: #e74c3c;
 }
 </style>

@@ -22,7 +22,10 @@
     <div class="recent-orders">
       <h3>Recent Orders</h3>
       <div v-if="loading" class="loading">Loading...</div>
-      <div v-else-if="error" class="error">{{ error }}</div>
+      <div v-else-if="error" class="error">
+        <p>{{ error }}</p>
+        <button @click="retryFetch" class="btn btn-primary">Retry</button>
+      </div>
       <table v-else class="orders-table">
         <thead>
           <tr>
@@ -54,9 +57,10 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import { useOrdersStore } from '../stores/orders'
+import { mockCustomers } from '../data/mockData.js'
 
 const ordersStore = useOrdersStore()
-const customers = ref([])
+const customers = ref([...mockCustomers])
 
 const totalOrders = computed(() => ordersStore.totalOrders)
 const pendingOrders = computed(() => ordersStore.pendingOrders)
@@ -69,21 +73,15 @@ const recentOrders = computed(() =>
 )
 
 const formatDate = (dateString) => {
-  return new Date(dateString).toLocaleDateString()
+  return new Date(dateString).toLocaleDateString('id-ID')
 }
 
-const fetchCustomers = async () => {
-  try {
-    const response = await fetch('http://localhost:3001/customers')
-    customers.value = await response.json()
-  } catch (err) {
-    console.error('Failed to fetch customers:', err)
-  }
+const retryFetch = async () => {
+  await ordersStore.fetchOrders()
 }
 
 onMounted(async () => {
   await ordersStore.fetchOrders()
-  await fetchCustomers()
 })
 </script>
 
@@ -105,6 +103,11 @@ onMounted(async () => {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
 }
 
 .stat-number {
@@ -156,6 +159,16 @@ onMounted(async () => {
   color: #155724;
 }
 
+.status.processing {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.status.delivered {
+  background-color: #e2e3e5;
+  color: #383d41;
+}
+
 .loading, .error {
   text-align: center;
   padding: 20px;
@@ -163,5 +176,22 @@ onMounted(async () => {
 
 .error {
   color: #e74c3c;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-primary {
+  background-color: #3498db;
+  color: white;
+}
+
+.btn:hover {
+  opacity: 0.9;
 }
 </style>

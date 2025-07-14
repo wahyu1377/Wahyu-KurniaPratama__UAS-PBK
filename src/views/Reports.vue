@@ -104,9 +104,10 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
+import { mockOrders } from '../data/mockData.js'
 
-const selectedPeriod = ref('month')
-const orders = ref([])
+const selectedPeriod = ref('all')
+const orders = ref([...mockOrders])
 const filteredOrders = ref([])
 const reportData = ref({
   totalRevenue: 0,
@@ -151,17 +152,6 @@ const popularServices = computed(() => {
     .sort((a, b) => b.count - a.count)
     .slice(0, 5)
 })
-
-const fetchOrders = async () => {
-  try {
-    const response = await fetch('http://localhost:3001/orders')
-    if (!response.ok) throw new Error('Failed to fetch orders')
-    orders.value = await response.json()
-    generateReport()
-  } catch (err) {
-    console.error('Failed to fetch orders:', err)
-  }
-}
 
 const generateReport = () => {
   const now = new Date()
@@ -236,7 +226,7 @@ const getServiceColor = (service) => {
     'Dry Clean': '#e74c3c',
     'Iron Only': '#f39c12',
     'Express': '#27ae60',
-    'Premium': '#9b59b6'
+    'Premium Care': '#9b59b6'
   }
   return colors[service] || '#95a5a6'
 }
@@ -262,8 +252,8 @@ const getMostPopularService = () => {
   return popularServices.value[0].name
 }
 
-onMounted(async () => {
-  await fetchOrders()
+onMounted(() => {
+  generateReport()
 })
 </script>
 
@@ -300,11 +290,6 @@ onMounted(async () => {
   cursor: pointer;
 }
 
-.filter-group select:focus {
-  outline: none;
-  border-color: #3498db;
-}
-
 .report-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -323,12 +308,6 @@ onMounted(async () => {
 
 .stat-card:hover {
   transform: translateY(-2px);
-}
-
-.stat-card h3 {
-  margin: 0 0 10px 0;
-  color: #2c3e50;
-  font-size: 1rem;
 }
 
 .stat-number {
@@ -350,11 +329,6 @@ onMounted(async () => {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.chart-container h3 {
-  margin: 0 0 15px 0;
-  color: #2c3e50;
 }
 
 .simple-chart {
@@ -385,7 +359,6 @@ onMounted(async () => {
   margin-left: 10px;
   min-width: 60px;
   transition: all 0.3s ease;
-  position: relative;
 }
 
 .bar:hover {
@@ -414,11 +387,6 @@ onMounted(async () => {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.detailed-report h3 {
-  margin: 0 0 15px 0;
-  color: #2c3e50;
-}
-
 .report-summary {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -442,10 +410,6 @@ onMounted(async () => {
     grid-template-columns: 1fr;
   }
 
-  .chart-container {
-    padding: 15px;
-  }
-
   .bar-label {
     width: 80px;
     font-size: 0.8rem;
@@ -453,10 +417,6 @@ onMounted(async () => {
 
   .report-stats {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .stat-number {
-    font-size: 1.4rem;
   }
 }
 
@@ -469,10 +429,6 @@ onMounted(async () => {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
-  }
-
-  .report-summary {
-    grid-template-columns: 1fr;
   }
 }
 </style>

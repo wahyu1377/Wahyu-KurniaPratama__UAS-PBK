@@ -1,8 +1,10 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
+import { mockOrders } from "../data/mockData.js";
 
 export const useOrdersStore = defineStore("orders", () => {
-  const orders = ref([]);
+  // Initialize with mock data
+  const orders = ref([...mockOrders]);
   const loading = ref(false);
   const error = ref(null);
 
@@ -17,77 +19,86 @@ export const useOrdersStore = defineStore("orders", () => {
   const fetchOrders = async () => {
     loading.value = true;
     error.value = null;
+
+    // Simulate API call delay
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
     try {
-      const response = await fetch("http://localhost:3001/orders");
-      if (!response.ok) throw new Error("Failed to fetch orders");
-      orders.value = await response.json();
+      // In demo mode, just return the mock data
+      // orders.value = [...mockOrders] // Already initialized
+      loading.value = false;
     } catch (err) {
-      error.value = err.message;
-    } finally {
+      error.value = "Failed to fetch orders";
       loading.value = false;
     }
   };
 
   const addOrder = async (orderData) => {
-    try {
-      const response = await fetch("http://localhost:3001/orders", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...orderData,
-          id: Date.now(),
-          createdAt: new Date().toISOString(),
-          status: "pending",
-        }),
-      });
+    loading.value = true;
 
-      if (!response.ok) throw new Error("Failed to add order");
-      const newOrder = await response.json();
-      orders.value.push(newOrder);
+    // Simulate API call delay
+    await new Promise((resolve) => setTimeout(resolve, 300));
+
+    try {
+      const newOrder = {
+        ...orderData,
+        id: Date.now(), // Generate unique ID
+        createdAt: new Date().toISOString(),
+        status: "pending",
+        totalPrice: orderData.weight * orderData.pricePerKg,
+      };
+
+      orders.value.unshift(newOrder); // Add to beginning of array
+      loading.value = false;
       return { success: true, order: newOrder };
     } catch (err) {
-      error.value = err.message;
-      return { success: false, message: err.message };
+      error.value = "Failed to add order";
+      loading.value = false;
+      return { success: false, message: "Failed to add order" };
     }
   };
 
   const updateOrder = async (id, updates) => {
-    try {
-      const response = await fetch(`http://localhost:3001/orders/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updates),
-      });
+    loading.value = true;
 
-      if (!response.ok) throw new Error("Failed to update order");
-      const updatedOrder = await response.json();
+    // Simulate API call delay
+    await new Promise((resolve) => setTimeout(resolve, 200));
+
+    try {
       const index = orders.value.findIndex((order) => order.id === id);
       if (index !== -1) {
-        orders.value[index] = updatedOrder;
+        orders.value[index] = { ...orders.value[index], ...updates };
+        loading.value = false;
+        return { success: true, order: orders.value[index] };
+      } else {
+        throw new Error("Order not found");
       }
-      return { success: true, order: updatedOrder };
     } catch (err) {
-      error.value = err.message;
-      return { success: false, message: err.message };
+      error.value = "Failed to update order";
+      loading.value = false;
+      return { success: false, message: "Failed to update order" };
     }
   };
 
   const deleteOrder = async (id) => {
-    try {
-      const response = await fetch(`http://localhost:3001/orders/${id}`, {
-        method: "DELETE",
-      });
+    loading.value = true;
 
-      if (!response.ok) throw new Error("Failed to delete order");
-      orders.value = orders.value.filter((order) => order.id !== id);
-      return { success: true };
+    // Simulate API call delay
+    await new Promise((resolve) => setTimeout(resolve, 200));
+
+    try {
+      const index = orders.value.findIndex((order) => order.id === id);
+      if (index !== -1) {
+        orders.value.splice(index, 1);
+        loading.value = false;
+        return { success: true };
+      } else {
+        throw new Error("Order not found");
+      }
     } catch (err) {
-      error.value = err.message;
-      return { success: false, message: err.message };
+      error.value = "Failed to delete order";
+      loading.value = false;
+      return { success: false, message: "Failed to delete order" };
     }
   };
 

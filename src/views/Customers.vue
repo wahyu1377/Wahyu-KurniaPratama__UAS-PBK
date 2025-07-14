@@ -93,8 +93,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { mockCustomers } from '../data/mockData.js'
 
-const customers = ref([])
+const customers = ref([...mockCustomers])
 const loading = ref(false)
 const error = ref('')
 const showAddModal = ref(false)
@@ -108,56 +109,42 @@ const newCustomer = ref({
 
 const fetchCustomers = async () => {
   loading.value = true
-  try {
-    const response = await fetch('http://localhost:3001/customers')
-    if (!response.ok) throw new Error('Failed to fetch customers')
-    customers.value = await response.json()
-  } catch (err) {
-    error.value = err.message
-  } finally {
-    loading.value = false
-  }
+  // Simulate API call delay
+  await new Promise(resolve => setTimeout(resolve, 300))
+  loading.value = false
 }
 
 const addNewCustomer = async () => {
   try {
-    const response = await fetch('http://localhost:3001/customers', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        ...newCustomer.value,
-        id: Date.now(),
-        totalOrders: 0,
-        createdAt: new Date().toISOString()
-      })
-    })
+    const customer = {
+      ...newCustomer.value,
+      id: Date.now(),
+      totalOrders: 0,
+      createdAt: new Date().toISOString()
+    }
 
-    if (!response.ok) throw new Error('Failed to add customer')
-    const customer = await response.json()
-    customers.value.push(customer)
+    customers.value.unshift(customer)
     showAddModal.value = false
     newCustomer.value = { name: '', phone: '', email: '', address: '' }
   } catch (err) {
-    error.value = err.message
+    error.value = "Failed to add customer"
   }
 }
 
 const editCustomer = (customer) => {
   console.log('Edit customer:', customer)
+  // Implement edit functionality
 }
 
 const deleteCustomer = async (id) => {
   if (confirm('Are you sure you want to delete this customer?')) {
     try {
-      const response = await fetch(`http://localhost:3001/customers/${id}`, {
-        method: 'DELETE'
-      })
-      if (!response.ok) throw new Error('Failed to delete customer')
-      customers.value = customers.value.filter(c => c.id !== id)
+      const index = customers.value.findIndex(c => c.id === id)
+      if (index !== -1) {
+        customers.value.splice(index, 1)
+      }
     } catch (err) {
-      error.value = err.message
+      error.value = "Failed to delete customer"
     }
   }
 }
@@ -197,6 +184,11 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: transform 0.2s ease;
+}
+
+.customer-card:hover {
+  transform: translateY(-2px);
 }
 
 .customer-info h3 {
@@ -213,6 +205,34 @@ onMounted(() => {
   margin-top: 15px;
   display: flex;
   gap: 10px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.btn-primary {
+  background-color: #3498db;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #95a5a6;
+  color: white;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn-sm {
+  padding: 4px 8px;
+  font-size: 0.8rem;
 }
 
 .modal-overlay {
@@ -260,5 +280,16 @@ onMounted(() => {
   justify-content: flex-end;
   gap: 10px;
   margin-top: 20px;
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 40px;
+  background: white;
+  border-radius: 8px;
+}
+
+.error {
+  color: #e74c3c;
 }
 </style>

@@ -34,25 +34,14 @@
       "createdAt": "2024-01-13T09:15:00.000Z"
     },
     {
-      "customerName": "ADI",
-      "phone": "3542523",
-      "service": "Dry Clean",
-      "weight": 4,
+      "customerName": "fulan",
+      "phone": "08471413",
+      "service": "Express",
+      "weight": 5.2,
       "pricePerKg": 5000,
-      "totalPrice": 20000,
-      "id": 1752157002626,
-      "createdAt": "2025-07-10T14:16:42.626Z",
-      "status": "pending"
-    },
-    {
-      "customerName": "ahmad",
-      "phone": "2432",
-      "service": "Dry Clean",
-      "weight": 3,
-      "pricePerKg": 5000,
-      "totalPrice": 15000,
-      "id": 1752157016394,
-      "createdAt": "2025-07-10T14:16:56.394Z",
+      "totalPrice": 26000,
+      "id": 1752160667368,
+      "createdAt": "2025-07-10T15:17:47.368Z",
       "status": "pending"
     }
   ],
@@ -74,6 +63,15 @@
       "id": 1752156239546,
       "totalOrders": 0,
       "createdAt": "2025-07-10T14:03:59.546Z"
+    },
+    {
+      "name": "fu;lan",
+      "phone": "0860345",
+      "email": "awhdawiddw@mail.com",
+      "address": "jl.marpoyan",
+      "id": 1752160799169,
+      "totalOrders": 0,
+      "createdAt": "2025-07-10T15:19:59.169Z"
     }
   ],
   "services": [
@@ -92,11 +90,11 @@
       "description": "Professional dry cleaning service"
     },
     {
-      "id": 1324113242,
-      "name": "Iron Only",
-      "price": 3000,
-      "duration": "12 hours",
-      "description": "Ironing service only"
+      "name": "cuci cepat ",
+      "price": 10000,
+      "duration": "120",
+      "description": "cuci gosok",
+      "id": 1752160884273
     }
   ],
   "users": [
