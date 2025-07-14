@@ -1,241 +1,231 @@
-# Laundry Management System
+# Sistem Manajemen Laundry
 
-Sistem manajemen laundry yang dibangun menggunakan Vue.js 3, Vue Router, Pinia, dan json-server 
+Aplikasi web untuk mengelola bisnis laundry yang dibuat dengan Vue.js 3, Vue Router, Pinia, dan menggunakan mock data untuk demo. Proyek ini dibuat untuk memenuhi tugas UAS mata kuliah Pemrograman Berbasis Komponen (PBK).
+
+## Deskripsi Proyek
+
+Sistem Manajemen Laundry adalah aplikasi web yang membantu pemilik usaha laundry dalam mengelola operasional harian mereka. Aplikasi ini menyediakan fitur lengkap mulai dari pencatatan pesanan, manajemen pelanggan, pengaturan layanan, hingga laporan keuangan.
+
+### Latar Belakang Masalah
+
+Banyak usaha laundry masih menggunakan sistem pencatatan manual yang rentan terhadap kesalahan dan kehilangan data. Sistem manual juga menyulitkan dalam:
+- Melacak status pesanan pelanggan
+- Menghitung pendapatan dan keuntungan
+- Mengelola data pelanggan
+- Membuat laporan bisnis
+
+Aplikasi ini hadir untuk mengatasi masalah tersebut dengan menyediakan sistem digital yang mudah digunakan.
 
 ## Fitur Utama
 
 ### 1. Dashboard
+- Ringkasan statistik bisnis (total pesanan, pesanan pending, pesanan selesai, total pelanggan)
+- Daftar pesanan terbaru
+- Tampilan yang informatif dan mudah dipahami
 
-- Statistik ringkasan (total orders, pending orders, completed orders, total customers)
-- Daftar order terbaru
-- Grafik visual sederhana
+### 2. Manajemen Pesanan
+- Tambah pesanan baru dengan detail lengkap
+- Edit dan hapus pesanan
+- Update status pesanan (Pending → Processing → Completed → Delivered)
+- Pencarian dan filter pesanan
+- Kalkulasi otomatis total harga berdasarkan berat dan tarif
 
-### 2. Order Management
+### 3. Manajemen Pelanggan
+- Database pelanggan dengan informasi lengkap
+- Riwayat pesanan per pelanggan
+- Tambah, edit, dan hapus data pelanggan
+- Tracking loyalitas pelanggan
 
-- Tambah order baru
-- Edit status order
-- Hapus order
-- Filter dan pencarian order
+### 4. Manajemen Layanan
+- Katalog layanan laundry (Wash & Dry, Dry Clean, Iron Only, Express, Premium Care)
+- Pengaturan harga per kilogram
+- Estimasi waktu pengerjaan
+- Deskripsi detail setiap layanan
 
-### 3. Customer Management
+### 5. Laporan dan Analitik
+- Laporan pendapatan berdasarkan periode
+- Grafik pesanan berdasarkan status
+- Analisis layanan paling populer
+- Filter laporan (hari ini, minggu ini, bulan ini, tahun ini, semua waktu)
+- Statistik tingkat keberhasilan pesanan
 
-- Daftar semua customer
-- Tambah customer baru
-- Edit informasi customer
-- Hapus customer
-
-### 4. Service Management
-
-- Daftar layanan laundry
-- Tambah layanan baru
-- Edit layanan
-- Hapus layanan
-
-### 5. Reports & Analytics
-
-- Laporan berdasarkan periode (hari, minggu, bulan, tahun)
-- Statistik revenue dan order
-- Grafik order berdasarkan status
-- Layanan paling populer
-
-### 6. Authentication
-
-- Login system dengan demo credentials
-- Route protection
-- Session management
+### 6. Sistem Autentikasi
+- Login dengan username dan password
+- Perlindungan halaman dengan route guard
+- Session management dengan localStorage
 
 ## Teknologi yang Digunakan
 
-- **Vue.js 3** - Framework JavaScript
-- **Vue Router** - Routing dengan history mode dan nested routes
-- **Pinia** - State management
-- **Vitest** - Unit testing
-- **json-server** - Mock REST API
-- **Vite** - Build tool dan development server
+### Frontend
+- **Vue.js 3** - Framework JavaScript dengan Composition API
+- **Vue Router 4** - Routing dengan history mode dan navigation guard
+- **Pinia** - State management yang modern dan ringan
 
-## Struktur API Endpoints
+### Development Tools
+- **Vite** - Build tool yang cepat untuk development
+- **Vitest** - Framework testing yang terintegrasi
+- **@vue/test-utils** - Utilities untuk testing komponen Vue
 
-### Orders
+### Styling
+- **CSS3** - Styling dengan Flexbox dan Grid
+- **Responsive Design** - Desain yang adaptif untuk semua ukuran layar
 
-- `GET /orders` - Mendapatkan semua order
-- `POST /orders` - Menambah order baru
-- `PUT /orders/:id` - Update order
-- `DELETE /orders/:id` - Hapus order
-
-### Customers
-
-- `GET /customers` - Mendapatkan semua customer
-- `POST /customers` - Menambah customer baru
-- `PUT /customers/:id` - Update customer
-- `DELETE /customers/:id` - Hapus customer
-
-### Services
-
-- `GET /services` - Mendapatkan semua layanan
-- `POST /services` - Menambah layanan baru
-- `PUT /services/:id` - Update layanan
-- `DELETE /services/:id` - Hapus layanan
-
-### Users
-
-- `GET /users` - Mendapatkan data user (untuk authentication)
-
-## Instalasi dan Menjalankan Aplikasi
-
-### Prerequisites
-
-- Node.js (versi 16 atau lebih baru)
-- npm atau yarn
-
-### Langkah Instalasi
-
-1. Clone repository
-   \`\`\`bash
-   git clone <repository-url>
-   cd laundry-management-system
-   \`\`\`
-
-2. Install dependencies
-   \`\`\`bash
-   npm install
-   \`\`\`
-
-3. Jalankan json-server (terminal pertama)
-   \`\`\`bash
-   npm run json-server
-   \`\`\`
-
-4. Jalankan development server (terminal kedua)
-   \`\`\`bash
-   npm run dev
-   \`\`\`
-
-5. Atau jalankan keduanya sekaligus
-   \`\`\`bash
-   npm run dev:full
-   \`\`\`
-
-### Menjalankan Testing
-
-\`\`\`bash
-
-# Jalankan unit tests
-
-npm run test
-
-# Jalankan tests dengan UI
-
-npm run test:ui
-\`\`\`
-
-## Demo Credentials
-
-- **Username:** admin
-- **Password:** admin123
+### Data Management
+- **Mock Data** - Data simulasi untuk demo tanpa perlu backend server
 
 ## Struktur Folder
 
 \`\`\`
 src/
-├── components/ # Komponen reusable
-│ ├── Header.vue
-│ └── Sidebar.vue
-├── views/ # Halaman utama
-│ ├── Dashboard.vue
-│ ├── Orders.vue
-│ ├── Customers.vue
-│ ├── Services.vue
-│ ├── Reports.vue
-│ └── Login.vue
-├── stores/ # Pinia stores
-│ ├── auth.js
-│ └── orders.js
-├── router/ # Vue Router configuration
-│ └── index.js
-├── tests/ # Unit tests
-│ ├── OrdersStore.test.js
-│ └── LoginComponent.test.js
-├── App.vue # Root component
-├── main.js # Entry point
-└── style.css # Global styles
+├── components/          # Komponen yang dapat digunakan ulang
+│   ├── Header.vue      # Header aplikasi
+│   └── Sidebar.vue     # Navigasi sidebar
+├── views/              # Halaman utama aplikasi
+│   ├── Dashboard.vue   # Halaman dashboard
+│   ├── Orders.vue      # Manajemen pesanan
+│   ├── Customers.vue   # Manajemen pelanggan
+│   ├── Services.vue    # Manajemen layanan
+│   ├── Reports.vue     # Laporan dan analitik
+│   └── Login.vue       # Halaman login
+├── stores/             # Pinia stores untuk state management
+│   ├── auth.js        # State autentikasi
+│   └── orders.js      # State manajemen pesanan
+├── data/               # Mock data untuk demo
+│   └── mockData.js    # Data simulasi
+├── router/             # Konfigurasi Vue Router
+│   └── index.js       # Definisi routes
+├── __tests__/         # File-file testing
+└── style.css          # Global styling
 \`\`\`
 
-## Fitur State Management (Pinia)
+## Cara Menjalankan Aplikasi
 
-### Auth Store
+### Persyaratan Sistem
+- Node.js versi 16 atau lebih baru
+- npm atau yarn package manager
 
-- Mengelola state authentication
-- Login/logout functionality
-- Session persistence
+### Langkah Instalasi
 
-### Orders Store
+1. **Clone atau download project**
+\`\`\`bash
+git clone [repository-url]
+cd laundry-management-system
+\`\`\`
 
-- Mengelola data orders
-- CRUD operations untuk orders
-- Computed properties untuk statistik
-- Error handling
+2. **Install dependencies**
+\`\`\`bash
+npm install
+\`\`\`
 
-## Unit Testing
+3. **Jalankan development server**
+\`\`\`bash
+npm run dev
+\`\`\`
 
-Aplikasi ini dilengkapi dengan unit tests menggunakan Vitest untuk:
+4. **Buka browser dan akses**
+\`\`\`
+http://localhost:5173
+\`\`\`
 
-1. **Orders Store Testing**
+### Kredensial Login Demo
+\`\`\`
+Username: admin
+Password: admin123
+\`\`\`
 
-   - Test state initialization
-   - Test computed properties (totalOrders, pendingOrders, completedOrders)
-   - Test API calls (fetchOrders, addOrder, updateOrder, deleteOrder)
-   - Test error handling
+## Testing
 
-2. **Login Component Testing**
-   - Test component rendering
-   - Test form interactions
-   - Test authentication flow
-   - Test error messages
+### Menjalankan Unit Test
+\`\`\`bash
+# Jalankan semua test
+npm run test
 
-## Responsive Design
+# Jalankan test dengan watch mode
+npm run test:watch
 
-Aplikasi ini responsive dan dapat digunakan di:
+# Jalankan test dengan UI
+npm run test:ui
+\`\`\`
 
-- Desktop (1200px+)
-- Tablet (768px - 1199px)
-- Mobile (< 768px)
+### Coverage Testing
+Proyek ini memiliki unit test untuk:
+- Komponen Vue (Login, Sidebar, Header)
+- Pinia stores (Auth, Orders)
+- Router configuration
+- Utility functions
+- Basic functionality
 
-## Browser Support
+## Build untuk Production
 
-- Chrome (recommended)
-- Firefox
-- Safari
-- Edge
+\`\`\`bash
+# Build aplikasi
+npm run build
 
-## Pengembangan Lebih Lanjut
+# Preview build hasil
+npm run preview
+\`\`\`
 
-Fitur yang dapat ditambahkan:
+File hasil build akan tersimpan di folder `dist/` dan siap untuk di-deploy.
 
-- Real-time notifications
-- Print receipt functionality
-- Advanced reporting dengan charts
-- Multi-user roles
-- Inventory management
-- SMS/WhatsApp integration
-- Payment gateway integration
+## Deployment
+
+### Deploy ke Vercel
+1. Build aplikasi dengan `npm run build`
+2. Upload folder `dist` ke Vercel
+3. Aplikasi siap diakses
+
+### Deploy ke Netlify
+1. Connect repository GitHub ke Netlify
+2. Set build command: `npm run build`
+3. Set publish directory: `dist`
+
+## Data Demo
+
+Aplikasi menggunakan mock data yang sudah disiapkan:
+- **8 pesanan** dengan berbagai status dan layanan
+- **6 pelanggan** dengan informasi lengkap
+- **5 layanan** dengan harga yang berbeda
+- **Total pendapatan** Rp 128.100 dari semua pesanan
+
+## Fitur Responsive
+
+Aplikasi ini dirancang responsive dan dapat digunakan di:
+- **Desktop** (1200px ke atas): Layout penuh dengan sidebar
+- **Tablet** (768px - 1199px): Layout yang disesuaikan
+- **Mobile** (kurang dari 768px): Layout mobile-friendly
+
+## Pengembangan Selanjutnya
+
+Beberapa fitur yang bisa ditambahkan:
+- Integrasi dengan database real (MySQL/PostgreSQL)
+- Sistem notifikasi WhatsApp untuk pelanggan
+- Laporan dalam format PDF/Excel
+- Multi-branch untuk usaha dengan beberapa cabang
+- Sistem inventory untuk tracking deterjen dan supplies
+- Payment gateway untuk pembayaran online
 
 ## Kontribusi
 
+Jika ingin berkontribusi pada proyek ini:
 1. Fork repository
-2. Buat feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push ke branch (`git push origin feature/AmazingFeature`)
+2. Buat branch baru untuk fitur (`git checkout -b fitur-baru`)
+3. Commit perubahan (`git commit -m 'Tambah fitur baru'`)
+4. Push ke branch (`git push origin fitur-baru`)
 5. Buat Pull Request
 
 ## Lisensi
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Proyek ini menggunakan lisensi MIT. Silakan gunakan dan modifikasi sesuai kebutuhan.
 
 ## Kontak
 
-Nama: [Wahyu Kurnia Pratama]
-NPM: [233510228]
-Email: [wahyukurniapratama@studebt.uir.ac.id]
+**Nama**: [Nama Mahasiswa]
+**NIM**: [NIM Mahasiswa]
+**Email**: [email@example.com]
+**GitHub**: [@username](https://github.com/username)
 
-Project Link: [https://github.com/username/laundry-management-system](https://github.com/username/laundry-management-system)
+---
 
+**Catatan**: Proyek ini dibuat untuk keperluan akademik sebagai tugas UAS mata kuliah Pemrograman Berbasis Komponen (PBK). Semua data yang digunakan adalah data simulasi untuk keperluan demo.
+
+*Terakhir diupdate: Januari 2024*
